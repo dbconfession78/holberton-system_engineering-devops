@@ -1,0 +1,1 @@
+This project teaches how to script bash commands

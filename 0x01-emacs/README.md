@@ -1,0 +1,1 @@
+The purpose of this project is to understand and explain basic use of the emacs terminal text editor.
