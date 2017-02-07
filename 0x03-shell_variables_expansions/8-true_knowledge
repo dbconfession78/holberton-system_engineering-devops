@@ -1,2 +1,2 @@
 #!/bin/bash
-printf "$TRUEKNOWLEDGE\n"
+printf "$((128+TRUEKNOWLEDGE))\n"
