@@ -48,7 +48,11 @@ The focus of this project is to learn:
 `				  - "good luck" on 8th iteration
 				  - "olberton School" for other iterations
 
-- `6-superstitious_numbers`: using a while loop, outputs 1 to 20
+- `6-superstitious_numbers`: using a while loop and case, outputs 1 to 20 and:
+  			     - "bad luck from China" on 4th iteration
+			     - "bad luck for Japan" on 9th iteration
+			     - "bad luck from Italy" on 17th iteration
+
 - `7-clock`: using a while loop, outputs the time from 0h to 12h 59m
 - `8-for_ls`:  outputs:
   	       - content of the current directory
