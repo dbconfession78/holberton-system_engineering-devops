@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# for loop: for NAME [in LIST ]; do COMMANDS; done
+
