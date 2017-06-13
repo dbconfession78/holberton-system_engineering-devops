@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# outputs x10 "Holberton School" and "Hi" on 9th on new line with a while loop
+i=0; while [ $i -lt 10 ]; do echo "Holberton School"; if [[ "$i" == 8 ]];
+then echo "Hi"; fi; let i+=1; done
