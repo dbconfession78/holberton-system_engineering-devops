@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# displays contents of the current dir in list format where only the part of the
+# name after the first dash is displayed
+file="*"
+for file in $file; do
+    echo "$file" | cut -d'-' -f2;
+done
