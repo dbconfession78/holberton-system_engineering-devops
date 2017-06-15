@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# displays all processes names containing 'bash'
+ps aux --forest | grep bash
