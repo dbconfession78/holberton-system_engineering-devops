@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# uses the `kill` commnnd to terminate loop
+PID="$(pgrep -f 4-to_infinity_and_beyond)"
+kill "$PID"
