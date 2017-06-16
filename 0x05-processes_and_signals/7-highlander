@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+# prevents loop from ending if kill signal is sent
+trap "echo I am invincible!!!" SIGTERM SIGKILL
+while :; do
+    echo "To infinity and beyond"
+    sleep 2
+done
