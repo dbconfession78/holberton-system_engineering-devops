@@ -1,0 +1,55 @@
+#! /usr/bin/env bash
+### BEGIN INIT INFO
+# Provides:
+# Required-Start:
+# Required-Stop:
+# Default-Start:
+# Default-Stop:
+# Short-Description:
+
+STATUS=$(pgrep -f ./manage_my_process)
+
+do_start () {
+    ./manage_my_process &
+}
+
+do_stop () {
+    pkill -f ./manage_my_process;
+    rm /var/run/my_process.pid;
+}
+
+do_restart () {
+    do_stop
+    do_start
+}
+
+case "$1" in
+    start)
+	# echo $$ # (un)comment to show/hide PID when beginning process
+	if [ "$STATUS" != ""  ]; then
+	    echo "PID $STATUS already running";
+	    exit
+	fi
+	do_start
+	echo manage_my_process started
+	;;
+    stop)
+	if [ "$STATUS" == ""  ]; then
+	    echo "manage_my_process already stopped"
+	    exit
+	fi
+	do_stop
+	echo manage_my_process stopped
+	;;
+    restart)
+	if [ "$STATUS" == ""  ]; then
+	    echo "manage_my_process not running"
+	    exit
+	fi
+	do_restart
+	echo manage_my_process restarted
+	;;
+    *)
+	echo 'Usage: manage_my_process {start|stop|restart}'
+	;;
+esac
