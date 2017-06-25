@@ -27,7 +27,7 @@ case "$1" in
 	fi
 	do_start
 	echo "manage_my_process started"
-	;; # maybe remove ;;'s
+	# ;; # maybe remove ;;'s
     stop)
 	if [ "$STATUS" == "" ]; then
 	    echo "manage_my_process already stopped"
@@ -36,7 +36,7 @@ case "$1" in
 	do_stop
 	rm /var/run/my_process.pid
 	echo "manage_my_process stopped"
-	;;
+	# ;;
     restart)
 	if [ "$STATUS" == ""  ]; then
 	    echo "manage_my_process not running"
@@ -44,8 +44,8 @@ case "$1" in
 	fi
 	do_restart
 	echo manage_my_process restarted
-	;;
+	# ;;
     *)
 	echo 'Usage: manage_my_process {start|stop|restart}'
-	;;
+	# ;;
 esac
