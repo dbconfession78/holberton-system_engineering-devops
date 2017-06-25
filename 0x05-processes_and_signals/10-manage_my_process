@@ -1,6 +1,5 @@
 #! /usr/bin/env bash
-# manages start, stop and restart command arguments for the
-# manage_my_process file
+# manages start, stop and restart args for the manage_my_process file
 
 STATUS=$(pgrep -f ./manage_my_process)
 
