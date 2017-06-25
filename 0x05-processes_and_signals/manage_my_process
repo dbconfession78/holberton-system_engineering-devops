@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# infintely loops "I am alive!" with 2 second sleep
+
+echo $$ | cat > /var/run/my_process.pid
+while :; do
+      echo "I am alive!" >> /tmp/my_process
+      sleep 2
+done;
