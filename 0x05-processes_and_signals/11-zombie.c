@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/wait.h>
+#include <sys/types.h>
+#include <unistd.h>
 
 /**
  * infite_while - starts an infiinte loop, pausing for 1 second each round
