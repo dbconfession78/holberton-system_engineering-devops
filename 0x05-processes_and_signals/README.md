@@ -1,7 +1,7 @@
 #  Holberton School - 0x05. Processes and signals
 ## Description
 
-The focus of this project is to learn:
+The focus of this project is to illustrate:
 * what a PID is
 * what a process is
 * how to find a process PID
