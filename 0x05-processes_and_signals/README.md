@@ -27,16 +27,13 @@ The focus of this project is to learn:
 ## File Descriptions
 - ``0-what-is-my-pid``: displays the scripts PID
 - ``1-list_your_processes``: displays a list of currently running processes
-- ``2-show_your_bash_pid``: displays lines containing `bash`, making it easy to
-			  get the PID of your Bash process
-- ``3-show_your_bash_pid_made_easy``: displays PID and process name of processes
-				    that contain `bash`
-- ``4-to_infinity_and_beyond``: displays To infinity and beyond indefinitely with
-			      `sleep 2` between each iteration
+- ``2-show_your_bash_pid``: displays lines containing `bash`, making it easy to get the PID of your Bash process
+- ``3-show_your_bash_pid_made_easy``: displays PID and process name of processes that contain `bash`
+- ``4-to_infinity_and_beyond``: displays To infinity and beyond indefinitely with `sleep 2` between each iteration
 - ``5-kill_me_now``: kills `4-to_infinity_and_beyond process` using `kill`
-- ``6-kill_me_now_made_easy``: kills 4-to_infinity_and_beyond process without
-			     using `kill` or `killall`
+- ``6-kill_me_now_made_easy``: kills 4-to_infinity_and_beyond process without using `kill` or `killall`
 - ``7-highlander``: displays:
+
 		  - "To inifinity and beyond" indefinitely
 		  - with `sleep 2` inbetween each iteration
 		  - "I am inviincible!!!" when recieving a SIGTERM signal
@@ -50,6 +47,7 @@ The focus of this project is to learn:
 			    - displays 'Y U no love me?!' when receiving a SIGINT signal
 			    - deletes the file /var/run/holbertonscript.pid and terminates itself when receiving a SIGQUIT or SIGTERM signal
 - ``10-manage_my_process``: bash ínit script that manages the `manage_my_process` script. Takes the arguments:
+
 			   - `start`: executes the `manage_my_process`script and writes it's PID to a file
 			   - `stop`: kills the `manage_my_process` script and deletes the file containing it's PID
 			   - `restart`: executes `start` and `stop` effectively replacing the PID
