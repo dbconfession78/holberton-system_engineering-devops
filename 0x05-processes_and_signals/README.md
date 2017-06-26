@@ -43,6 +43,7 @@ The focus of this project is to learn:
 
 - ``8-beheaded_process``: kills the process,  "7-highlander"
 - ``9-process_and_pid_file``: bash script that:
+
 			    - creates the file /var/run/holbertonscript.pid containing its PID
 			    - displays 'To infinity and beyond' indefinitely
 			    - displays 'I hate the kill command' when receiving a SIGTERM signal
