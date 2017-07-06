@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# generates a public/private 
+ssh-keygen -f ./holberton -N "password" -b 4096
