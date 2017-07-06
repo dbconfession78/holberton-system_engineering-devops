@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+ssh -i ~/.ssh/holberton ubuntu@54.159.152.54
+
