@@ -4,6 +4,7 @@
 
 sudo apt-get -y install nginx
 sudo service nginx start
+echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html;
 sudo sed -i '26 i \     rewrite ^/redirect_me https://en.wikipedia.org/wiki/Vajiralongkorn permanent;' /etc/nginx/sites-available/default
 sudo sed -i '27 i \     error_page 404 /custom_404.html;\n location = /custom_404.html {\n    root /usr/share/nginx/html;\n    internal;\n}' /etc/nginx/sites-available/default
 sudo service nginx restart
