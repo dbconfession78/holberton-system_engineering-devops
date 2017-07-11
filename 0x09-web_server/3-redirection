@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
 # redirects to a youtube page and returns status code 301 with status response
+
+sudo apt-get -y install nginx
+sudo service nginx start
 sudo sed -i '26 i \     rewrite ^/redirect_me https://en.wikipedia.org/wiki/Vajiralongkorn permanent;' /etc/nginx/sites-available/default
 sudo service nginx restart
