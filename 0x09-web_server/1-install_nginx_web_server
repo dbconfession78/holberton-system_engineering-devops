@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # installs nginx listening at port 80
 # when sent a GET request at it's root, sends the response "Holberton School"
-apt-get -y install nginx
+sudo apt-get -y install nginx
+sudo service nginx start
 echo "Holberton School for the win!" | cat > /usr/share/nginx/html/index.html
 srvice nginx restart
