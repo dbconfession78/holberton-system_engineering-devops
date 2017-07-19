@@ -2,6 +2,7 @@
 # redirects to a youtube page and returns status code 301 with status response
 # handles 404 redirect for pages not on server
 
+sudo apt-get update
 sudo apt-get -y install nginx
 sudo service nginx start
 echo "Ceci n'est pas une page" | sudo tee /usr/share/nginx/html/custom_404.html;
