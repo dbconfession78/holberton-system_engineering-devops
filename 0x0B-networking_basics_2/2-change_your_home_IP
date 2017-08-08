@@ -2,6 +2,5 @@
 # configures an Ubuntu server hosts file specifications
 cp /etc/hosts ~/hosts.new
 sed -i "s/127.0.0.1\tlocalhost/127.0.0.2\tlocalhost/g" ~/hosts.new
-echo '8.8.8.8\tfacebook.com' | cat >> ~/hosts.new
-# sed -i -e "\$a8.8.8.8\tfacebook.com\n" ~/hosts.new
+sed -i -e "\$a8.8.8.8\tfacebook.com\n" ~/hosts.new
 cp -f ~/hosts.new /etc/hosts
