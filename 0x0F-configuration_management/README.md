@@ -1,18 +1,19 @@
-Holberton School - 0x0E. Load balancer
+Holberton School - 0x0F Configuration management
 ## Description
 
-The focus of this project is to write a blog post to further learn:
-* what and how a load balancer works
-* what and how http headers work
+The focus of this project is to learn how to use Puppet for server configuration management
 
 ## Helpful Links
-
+* <a href="https://www.digitalocean.com/community/tutorials/an-introduction-to-configuration-management">Intro to Configuration Management</a>
+* <a href="https://docs.puppet.com/puppet/3.5/type.html#file">Puppet resource type: file</a>
+* <a href="http://puppet-lint.com/">Puppet lint</a>
+* <a href="https://github.com/voxpupuli/puppet-mode">Puppet emacs mode</a>
 
 ## File Descriptions
-- `0-custom_http_response-header`: installs nginx and adds a custom http header
-- `1-install_load_balancer`: configures a new Ubuntu machine with:
-    - HAproxy installation
-    - load balancing via  roundrobin algorithm
+- `0-create_a_file.pp`: creates a puppet (.pp) file
+- `1-install_a_package.pp`: installs puppet
+- `2-execute_a_command.pp`: manifest that kills a process named killmenow
+
 
 ## Author
 Stuart Kuredjian
