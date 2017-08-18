@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # installs nginx and adds the a custom header
-shellcheck -e SC2154 myscript
+shellcheck disable=SC2154
 sudo apt-get update
 sudo apt-get -y install nginx
 sudo service nginx start
