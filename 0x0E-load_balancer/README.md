@@ -1,7 +1,7 @@
 Holberton School - 0x0E. Load balancer
 ## Description
 
-The focus of this project is to write a blog post to further learn:
+The focus of this project is to learn:
 * what and how a load balancer works
 * what and how http headers work
 
