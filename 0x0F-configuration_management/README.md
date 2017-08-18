@@ -10,7 +10,7 @@ The focus of this project is to learn how to use Puppet for server configuration
 * <a href="https://github.com/voxpupuli/puppet-mode">Puppet emacs mode</a>
 
 ## File Descriptions
-- `0-create_a_file.pp`: creates a puppet (.pp) file
+- `0-create_a_file.pp`: creates a puppet file in /tmp
 - `1-install_a_package.pp`: installs puppet
 - `2-execute_a_command.pp`: manifest that kills a process named killmenow
 
