@@ -2,7 +2,7 @@
 # displays record type of selected subdomain and where it points to
 domain="$1"
 subdomain="$2"
-sub_list=("www" "web-02" "web-01" "lb-01")
+sub_list=("www" "lb-01" "web-01" "web-02")
 
 fetch_record () {
 	result=$(dig $2.$1 | grep -A1 ";; ANSWER SECTION:" | tail -1)
