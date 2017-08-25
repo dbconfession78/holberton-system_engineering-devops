@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# runs the nginx webserver as the 'nginx' user
 pkill apache2
 chmod -R 755 /etc/nginx/
 sed -i 's/listen 80 /listen 8080 /g' /etc/nginx/sites-enabled/default
