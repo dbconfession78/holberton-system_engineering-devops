@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+apt-get update
+apt-get install ufw
+apt-get update
+service ufw start
+ufw default deny incoming
+ufw allow 80/tcp
+ufw allow 22/tcp
+ufw allow 443/tcp
+ufw enable
