@@ -1,27 +1,29 @@
 Holbert School - 0x11. Postmortem
 
 ## Issue Summary
-On 08/24/17 between ~12:00 and 1:40 PM PST,
-s-tickystudios.online was not authenticating secure private https connections with a valid SSL certificate. 100% of users navigating to https://www.s-tickystudios.online/hbnb/index.html were presented with the browser message, "Your connection is not private". Those who proceeded, did so without a secure private connection.
+***On 08/24/17 between ~12:00 and 1:40 PM PST***:
 
-Root Cause: SSL certificate expired without an initial renewal policy in place.
-Business impact: expired SSL certificate detered 65% of users presented with their browser's insecure connection warning message.
+s-tickystudios.online ceased authenticating secure private https connections with a valid SSL certificate. 100% of users navigating to https://www.s-tickystudios.online/hbnb/index.html were presented with the browser message, "Your connection is not private". Those who proceeded, did so without a secure private connection.
+
+***Root Cause***: SSL certificate expired without an initial renewal policy in place.
+***Business impact***: expired SSL certificate detered 65% of users presented with their browser's insecure connection warning message.
 
 ## Timeline
-1:00 PM PST: issue detected when customer service recived an email reporting the browser message "Your connection is not private." Customer service rep. proceeded to escalate issue to webdev security department.
+***1:00 PM PST***: issue detected when customer service recived an email reporting the browser message "Your connection is not private." Customer service rep. proceeded to escalate issue to webdev security department.
 
-Actions taken: 
-1:10 PM PST: Suspicion of expired SSL confirmed after checking certificate exp. date 
-1:15 PM PST: temporarily redirected all traffic to webserver, 108-web-01
-1:25 PM PST: SSL renewed - on load balance server, 108-lb-01:
+__Actions taken:__
+
+***1:10 PM PST***: Suspicion of expired SSL confirmed after checking certificate exp. date 
+***1:15 PM PST***: temporarily redirected all traffic to webserver, 108-web-01
+***1:25 PM PST***: SSL renewed - on load balance server, 108-lb-01:
 	 		 	 - stop HAProxy from lsitening on port 80
 	 		 	 - run 'certbot certonly --standalone --preferred-challenges http --http-01-port 80 -d s-tickystudios.online -d www.s-tickystudios.online'
 				 - verify replacement .pem files in /etc/letsencrypt/live/s-tickystudios.online
 				 - combine fullchain.pem and privkey.pem by running 'DOMAI=s-tickystudios.online' sudo -E bash -c 'cat /etc/letsencrypt/live/$DOMAIN/fullchain.pem /etc/letsencrypt/live/$DOMAIN/privkey.pem > /etc/haproxy/certs/$DOMAIN.pem'
 				 - set HAProxy to listen on port 80 again
 
-1:40 PM PST: traffic redirected back to load balance server, 108-lb-01.
-1:50 PM PST: tests run and confirmed to ensure subsequent private connections
+***1:40 PM PST***: traffic redirected back to load balance server, 108-lb-01.
+***1:50 PM PST***: tests run and confirmed to ensure subsequent private connections
 
 ## Corrective/Preventative meausures taken
 Daily certificate auto-renewal policy implemented by:
