@@ -11,8 +11,6 @@ s-tickystudios.online ceased authenticating secure private https connections wit
 ## Timeline
 ***1:00 PM PST***: issue detected when customer service recived an email reporting the browser message "Your connection is not private." Customer service rep. proceeded to escalate issue to webdev security department.
 
-__Actions taken:__
-
 ***1:10 PM PST***: Suspicion of expired SSL confirmed after checking certificate exp. date 
 ***1:15 PM PST***: temporarily redirected all traffic to webserver, 108-web-01
 ***1:25 PM PST***: SSL renewed - on load balance server, 108-lb-01:
@@ -28,9 +26,9 @@ __Actions taken:__
 ## Corrective/Preventative meausures taken
 Daily certificate auto-renewal policy implemented by:
 
-1) Creating an executable renewal script
+***1) Creating an executable renewal script***
 File: /usr/local/bin/renew.sh
-Contents:
+
 		#!/bin/sh
 
 		SITE=s-tickystudios.online
@@ -44,13 +42,13 @@ Contents:
 		# reload haproxy
 		service haproxy reload
   	 
-2) Updating certbot configuartion
+***2) Updating certbot configuartion***
    - configure letsencrypt to not use port 80 or 443 when renewing. This is done by
-editing  /etc/letsencrypt/renewal/s-tickystudios.online.conf at line 'http01_port' to read 'http01_port = 54321'
-   - after saving, close and test by running 'certbot renew --dry-run'
+editing  /etc/letsencrypt/renewal/s-tickystudios.online.conf at line 'http01_port' to read `http01_port = 54321`
+   - after saving, close and test by running `certbot renew --dry-run`
 
-3) Create a Cron job to run renew.sh every day
-   - run 'crontab -e'
+***3) Create a Cron job to run renew.sh every day***
+   - run `crontab -e`
    - add the following to the bottom of the file:
   `30 2 * * * /usr/bin/certbot renew --renew-hook "/usr/local/bin/renew.sh" >> /var/log/le-renewal.log`
 
