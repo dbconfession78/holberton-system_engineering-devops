@@ -33,6 +33,7 @@ s-tickystudios.online ceased authenticating secure private https connections wit
 Daily certificate auto-renewal policy implemented by:
 
 ***1) Creating an executable renewal script***
+
 File: /usr/local/bin/renew.sh
 
 		#!/bin/sh
