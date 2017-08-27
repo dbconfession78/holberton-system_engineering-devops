@@ -53,8 +53,9 @@ editing  /etc/letsencrypt/renewal/s-tickystudios.online.conf at line 'http01_por
   `30 2 * * * /usr/bin/certbot renew --renew-hook "/usr/local/bin/renew.sh" >> /var/log/le-renewal.log`
 
 
-An auto-check for valid certificate script implemented
-Minute-by-minute auto-request implemented to ensure SSL connections are private
-Auto-notify (email/text) script implemented. 
-Auto-renewal script implemented. If for any reason, a certificate expires anyway, the renew.sh file will be run and an admin will be notified.
+After the above measures have been taken, further care will be taken by implementing the following:
+	- an auto-check script for certificate validity
+	- minute-by-minute auto-request to ensure connections are secure and private
+        - auto-notifiction (email/text) script for various server events including secure connection fail 
+	- a backup script which checks to make sure the cron job has renewed. In the event that a certificate expires anyway this script should run the renew.sh file and use the mentioned notification script to notify admin.
 
