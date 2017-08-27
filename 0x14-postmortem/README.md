@@ -1,12 +1,12 @@
 Holbert School - 0x11. Postmortem
 
-##Issue Summary
+## Issue Summary
 On 08/24/17 between ~12:00 and 1:40 PM PST, s-tickystudios.online was not authenticating secure private https connections with a valid SSL certificate. 100% of users navigating to https://www.s-tickystudios.online/hbnb/index.html were presented with the browser message, "Your connection is not private". Those who proceeded, did so without a secure private connection.
 
 Root Cause: SSL certificate expired without an initial renewal policy in place.
 Business impact: expired SSL certificate detered 65% of users presented with their browser's insecure connection warning message.
 
-##Timeline
+## Timeline
 1:00 PM PST: issue detected when customer service recived an email reporting the browser message "Your connection is not private." Customer service rep. proceeded to escalate issue to webdev security department.
 
 Actions taken: 
@@ -22,7 +22,7 @@ Actions taken:
 1:40 PM PST: traffic redirected back to load balance server, 108-lb-01.
 1:50 PM PST: tests run and confirmed to ensure subsequent private connections
 
-##Corrective/Preventative meausures taken
+## Corrective/Preventative meausures taken
 Daily certificate auto-renewal policy implemented by:
 
 1) Creating an executable renewal script
