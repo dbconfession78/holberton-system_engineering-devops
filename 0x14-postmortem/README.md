@@ -42,18 +42,18 @@ Contents:
 		service haproxy reload
   	 
 2) Updating certbot configuartion
-- configure letsencrypt to not use port 80 or 443 when renewing. This is done by
+   - configure letsencrypt to not use port 80 or 443 when renewing. This is done by
 editing  /etc/letsencrypt/renewal/s-tickystudios.online.conf at line 'http01_port' to read 'http01_port = 54321'
-- after saving, close and test by running 'certbot renew --dry-run'
+   - after saving, close and test by running 'certbot renew --dry-run'
 
 3) Create a Cron job to run renew.sh every day
-- run 'crontab -e'
-- add the following to the bottom of the file:
-  '30 2 * * * /usr/bin/certbot renew --renew-hook "/usr/local/bin/renew.sh" >> /var/log/le-renewal.log'
+   - run 'crontab -e'
+   - add the following to the bottom of the file:
+  `30 2 * * * /usr/bin/certbot renew --renew-hook "/usr/local/bin/renew.sh" >> /var/log/le-renewal.log`
 
 
-- An auto-check for valid certificate script implemented
-- minute-by-minute auto-request implemented to ensure SSL connections are private
-- auto-notify (email/text) script implemented. 
-- auto-renewal script implemented. If for any reason, a certificate expires anyway, the renew.sh file will be run and an admin will be notified.
+An auto-check for valid certificate script implemented
+Minute-by-minute auto-request implemented to ensure SSL connections are private
+Auto-notify (email/text) script implemented. 
+Auto-renewal script implemented. If for any reason, a certificate expires anyway, the renew.sh file will be run and an admin will be notified.
 
