@@ -8,10 +8,8 @@ respawn
 setuid ubuntu
 setgid ubuntu
 
+env PATH=/home/ubuntu/AirBnB_clone_v2/web_flask/airbnbdev/bin
 script
 		cd /home/ubuntu/AirBnB_clone_v2/
 		exec gunicorn --bind 127.0.0.1:8001 web_flask.0-hello_route:application
 end script
-# env PATH=/home/ubuntu/AirBnB_clone_v2/web_flask/abnbenv/bin
-#chdir /home/ubuntu/AirBnB_clone_v2/web_flask
-#exec gunicorn --workers 3 --bind 127.0.0.1:8001 0-hello_route
