@@ -2,8 +2,8 @@
 """
 Module: 0-gather_data_from_an_API
 """
-from sys import argv
 import requests
+from sys import argv
 
 
 def print_completed(user_id):
