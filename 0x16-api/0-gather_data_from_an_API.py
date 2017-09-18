@@ -2,8 +2,6 @@
 """
 Module: 0-gather_data_from_an_API
 """
-from sys import argv
-import requests
 
 
 def print_completed(user_id):
@@ -23,9 +21,12 @@ def print_completed(user_id):
 
 if __name__ == '__main__':
     """ script entry point """
-    if len(argv) > 1:
+    import requests
+    import sys
+
+    if len(sys.argv) > 1:
         try:
-            user_id = argv[1]
+            user_id = sys.argv[1]
             print_completed(user_id)
         except:
             pass
