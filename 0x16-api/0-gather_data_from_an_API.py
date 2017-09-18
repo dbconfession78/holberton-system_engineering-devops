@@ -15,7 +15,7 @@ def print_completed(user_id):
     completed = [td for td in todos if td.get('completed') is True]
 
     print('Employee {} is done with tasks({}/{}):'.format(
-        user[0]['name'], len(completed), len(todos)))
+        user[0].get('name'), len(completed), len(todos)))
 
     for todo in completed:
         print('\t{}'.format(todo.get('title')))
