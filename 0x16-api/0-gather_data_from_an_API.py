@@ -18,7 +18,7 @@ def print_completed(user_id):
         user[0].get('name'), len(completed), len(todos)))
 
     for todo in completed:
-        print('\t{}'.format(todo.get('title')))
+        print('\t {}'.format(todo.get('title')))
 
 
 if __name__ == '__main__':
