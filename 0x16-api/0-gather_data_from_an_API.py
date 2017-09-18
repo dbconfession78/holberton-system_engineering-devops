@@ -2,6 +2,8 @@
 """
 Module: 0-gather_data_from_an_API
 """
+from sys import argv
+import requests
 
 
 def print_completed(user_id):
@@ -12,7 +14,7 @@ def print_completed(user_id):
     todos = requests.get('{}/todos?userId={}'.format(base_url, user_id)).json()
     completed = [td for td in todos if td.get('completed') is True]
 
-    print('Employee {} is done with tasks ({}/{}):'.format(
+    print('Employee {} is done with tasks({}/{}):'.format(
         user[0]['name'], len(completed), len(todos)))
 
     for todo in completed:
@@ -21,12 +23,9 @@ def print_completed(user_id):
 
 if __name__ == '__main__':
     """ script entry point """
-    import requests
-    import sys
-
-    if len(sys.argv) > 1:
+    if len(argv) > 1:
         try:
-            user_id = sys.argv[1]
+            user_id = argv[1]
             print_completed(user_id)
         except:
             pass
