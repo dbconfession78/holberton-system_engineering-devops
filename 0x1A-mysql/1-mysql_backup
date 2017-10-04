@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+# backsup up and compresses all databases
+now=$(date +"%d_%m_%Y")
+pw=$1;
+ mysqldump -uroot -p"$pw" --all-databases > backup.sql
+ tar -czvf "$now.tar.gz" backup.sql
