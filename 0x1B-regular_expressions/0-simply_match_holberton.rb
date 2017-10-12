@@ -1,5 +1,5 @@
 #!/usr/bin/env ruby
-puts ARGV[0].scan(/H[a-z]lberton/).join
+puts ARGV[0].scan(/H[o]lberton/).join
 
 # Holberton
 # holberton
