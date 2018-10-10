@@ -9,22 +9,25 @@ headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) \
 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36'}
 
 
+dict = defaultdict(int)
+after = None
+done = False
+
+
 def count_words(subreddit, word_list):
     """  queries the Reddit API, parses the title of all hot articles,
     and prints a sorted count of given keywords (case-insensitive,
     delimited by spaces. Javascript should count as javascript,
     but java should not)."""
+    global after, dict, done, headers
 
     subreddit = subreddit.lower()
-    dict = defaultdict(int)
-    retval = helper(subreddit, None, word_list, dict)
-    print_results(retval)
-
-
-def helper(subreddit, after, word_list, dict):
-    """ """
+    # dict = defaultdict(int)
+    # retval = helper(subreddit, None, word_list, dict)
     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}".format(
         subreddit, after if after else '')
+    if headers:
+        pass
     r = requests.get(url, headers=headers, allow_redirects=False)
     if r.status_code != 200:
         return dict
@@ -40,7 +43,34 @@ def helper(subreddit, after, word_list, dict):
 
     if after is None:
         return dict
-    return helper(subreddit, after, word_list, dict)
+
+    retval = count_words(subreddit, word_list)
+    if done:
+        return
+    print_results(retval)
+    done = True
+
+
+# def helper(subreddit, after, word_list, dict):
+#     """ """
+#     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}".format(
+#         subreddit, after if after else '')
+#     r = requests.get(url, headers=headers, allow_redirects=False)
+#     if r.status_code != 200:
+#         return dict
+#     content = str(r.content, encoding='utf8')
+#     obj = get_content_object_form(content)
+#     data = obj.data
+#     articles = data.children
+#     after = data.after
+#
+#     for article in articles:
+#         title = article.data.title
+#         dict = get_word_count(title, word_list, dict)
+#
+#     if after is None:
+#         return dict
+#     return helper(subreddit, after, word_list, dict)
 
 
 def get_word_count(title, word_list, dict):
