@@ -9,7 +9,7 @@ headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) \
 AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36'}
 
 
-dict = defaultdict(int)
+_dict = defaultdict(int)
 after = None
 done = False
 
@@ -19,18 +19,14 @@ def count_words(subreddit, word_list):
     and prints a sorted count of given keywords (case-insensitive,
     delimited by spaces. Javascript should count as javascript,
     but java should not)."""
-    global after, dict, done, headers
+    global after, _dict, done, headers
 
     subreddit = subreddit.lower()
-    # dict = defaultdict(int)
-    # retval = helper(subreddit, None, word_list, dict)
     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}".format(
         subreddit, after if after else '')
-    if headers:
-        pass
     r = requests.get(url, headers=headers, allow_redirects=False)
     if r.status_code != 200:
-        return dict
+        return
     content = str(r.content, encoding='utf8')
     obj = get_content_object_form(content)
     data = obj.data
@@ -39,15 +35,15 @@ def count_words(subreddit, word_list):
 
     for article in articles:
         title = article.data.title
-        dict = get_word_count(title, word_list, dict)
+        _dict = get_word_count(title, word_list, _dict)
 
     if after is None:
-        return dict
+        return
 
-    retval = count_words(subreddit, word_list)
+    count_words(subreddit, word_list)
     if done:
         return
-    print_results(retval)
+    print_results(_dict)
     done = True
 
 
@@ -73,13 +69,13 @@ def count_words(subreddit, word_list):
 #     return helper(subreddit, after, word_list, dict)
 
 
-def get_word_count(title, word_list, dict):
+def get_word_count(title, word_list, _dict):
     """ ? """
     for word in word_list:
         wc = title.count(word)
         if wc > 0:
-            dict[word] += wc
-    return dict
+            _dict[word] += wc
+    return _dict
 
 
 def print_results(results):
