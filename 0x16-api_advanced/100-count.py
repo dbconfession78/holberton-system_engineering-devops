@@ -1,85 +1,63 @@
 #!/usr/bin/python3
 """100-count"""
-from collections import (defaultdict, namedtuple)
+from collections import namedtuple
 import json
 import requests
 
 
-headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_3) \
-AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36'}
+def count_words(subreddit, word_list, after=None):
+    """  queries the Reddit API for hottest posts in subreddit, 'subreddit' and
+    searches for number of time each word in 'word_list appears'"""
 
-
-_dict = defaultdict(int)
-after = None
-done = False
-
-
-def count_words(subreddit, word_list):
-    """  queries the Reddit API, parses the title of all hot articles,
-    and prints a sorted count of given keywords (case-insensitive,
-    delimited by spaces. Javascript should count as javascript,
-    but java should not)."""
-    global after, _dict, done, headers
-
-    subreddit = subreddit.lower()
-    url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}".format(
-        subreddit, after if after else '')
-    r = requests.get(url, headers=headers, allow_redirects=False)
-    if r.status_code != 200:
+    if type(word_list) is list:
+        results_dict = {word: 0 for word in word_list}
+    else:
+        results_dict = word_list
+    response = get_articles(subreddit, after=after)
+    if response.status_code != 200:
         return
-    content = str(r.content, encoding='utf8')
+    content = str(response.content, encoding='utf8')
     obj = get_content_object_form(content)
     data = obj.data
     articles = data.children
     after = data.after
 
     for article in articles:
-        title = article.data.title
-        _dict = get_word_count(title, word_list, _dict)
+        title = article.data.title.lower()
+        results_dict = update_word_count(title, results_dict)
 
     if after is None:
-        return
-
-    count_words(subreddit, word_list)
-    if done:
-        return
-    print_results(_dict)
-    done = True
+        print_results(results_dict)
+    else:
+        count_words(subreddit, results_dict, after)
 
 
-# def helper(subreddit, after, word_list, dict):
-#     """ """
-#     url = "https://www.reddit.com/r/{}/hot.json?limit=100&after={}".format(
-#         subreddit, after if after else '')
-#     r = requests.get(url, headers=headers, allow_redirects=False)
-#     if r.status_code != 200:
-#         return dict
-#     content = str(r.content, encoding='utf8')
-#     obj = get_content_object_form(content)
-#     data = obj.data
-#     articles = data.children
-#     after = data.after
-#
-#     for article in articles:
-#         title = article.data.title
-#         dict = get_word_count(title, word_list, dict)
-#
-#     if after is None:
-#         return dict
-#     return helper(subreddit, after, word_list, dict)
-
-
-def get_word_count(title, word_list, _dict):
-    """ ? """
-    for word in word_list:
+def update_word_count(title, results_dict):
+    """ counts occurances of 'results_list` keys in `title` and appends them
+    to running results_dict """
+    title = [x for x in title.split()]
+    for word in results_dict:
         wc = title.count(word)
         if wc > 0:
-            _dict[word] += wc
-    return _dict
+            results_dict[word] += wc
+    return results_dict
+
+
+def get_articles(subreddit, after):
+    """ makes reddit API request to retrive articles """
+    params = {'limit': '100', 'after': after if after else ''}
+    headers = {'User-Agent': 'not-you'}
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    response = requests.get(url=url,
+                            headers=headers,
+                            allow_redirects=False,
+                            params=params)
+
+    return response
 
 
 def print_results(results):
-    """ ? """
+    """ prints the query results """
 
     results_info = []
     keys = results.keys()
@@ -87,10 +65,11 @@ def print_results(results):
         results_info.append({'key': elem, 'count': results[elem]})
     results_info = sorted(results_info, key=lambda k: k['count'])[::-1]
     for elem in results_info:
-        print("{}: {}".format(elem['key'], elem['count']))
+        if results[elem['key']] > 0:
+            print("{}: {}".format(elem['key'], elem['count']))
 
 
 def get_content_object_form(content):
-    """ ?? """
+    """ puts json response into object form """
     return json.loads(content, object_hook=lambda d: namedtuple(
         'X', d.keys())(*d.values()))
