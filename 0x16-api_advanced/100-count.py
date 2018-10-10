@@ -9,6 +9,7 @@ def count_words(subreddit, word_list, after=None):
     """  queries the Reddit API for hottest posts in subreddit, 'subreddit' and
     searches for number of time each word in 'word_list appears'"""
 
+    subreddit = subreddit.lower()
     if type(word_list) is list:
         results_dict = {word: 0 for word in word_list}
     else:
