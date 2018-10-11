@@ -11,7 +11,7 @@ def count_words(subreddit, word_list, after=None):
 
     subreddit = subreddit.lower()
     if type(word_list) is list:
-        results_dict = {word: 0 for word in word_list}
+        results_dict = {word.lower(): 0 for word in word_list}
     else:
         results_dict = word_list
     response = get_articles(subreddit, after=after)
